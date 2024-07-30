@@ -1,113 +1,256 @@
+'use client'
+import { ReactElement, useState } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Dialog } from "@headlessui/react";
+import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+const features = [
+  {
+    name: "Quiero prestar",
+    description:
+      "Banqi te convierte en banquero. Compra cartera a personas confiables, gana un 21,13% anual con pagos mensuales y deja que Banqi se encargue de los aspectos legales, financieros y de cobranza. Independízate con Banqi.",
+    buttom: "¡Quiero ser banquero!",
+    link: "https://forms.gle/APXEYo39TaR1fY6B7"
+  },
+  {
+    name: "Quiero un préstamo",
+    description:
+      "!El poder es nuestro! Construye un mundo mejor eligiendo bien dónde pones tu dinero. Únete a Banqi, donde los intereses son justos, claros, y la mayoría de las ganancias van para quienes han ahorrado con esfuerzo su capital.",
+    buttom: "¡Quiero un préstamo!",
+    link: "https://forms.gle/CPch9agRieG7NnBS6"
+  },
+];
+export default function IndexPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="bg-white">
+      {/* Header */}
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav
+          className="flex items-center justify-between p-6 lg:px-8"
+          aria-label="Global"
+        >
+          <div className="flex lg:flex-1">
+            <Link href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Your Company</span>
+              <Image
+                className="h-16 w-auto"
+                width={100}
+                height={100}
+                src="/logo.png"
+                alt=""
+              />
+            </Link>
+          </div>
+          <div className="flex lg:hidden">
+            <button
+              type="button"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <span className="sr-only">Open main menu</span>
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+
+          {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Link
+              href="/home"
+              className="text-sm font-semibold leading-6 text-white"
+            >
+              Iniciar sesión <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div> */}
+        </nav>
+        <Dialog
+          as="div"
+          className="lg:hidden"
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+        >
+          <div className="fixed inset-0 z-50" />
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div className="flex items-center justify-between">
+              <Link href="#" className="-m-1.5 p-1.5">
+                <span className="sr-only">Your Company</span>
+                <Image
+                  className="h-8 w-auto"
+                  src="/logo.png"
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+              </Link>
+              <button
+                type="button"
+                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="sr-only">Close menu</span>
+                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div className="py-6">
+                  <Link
+                    href="/home"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Iniciar sesión
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Dialog.Panel>
+        </Dialog>
+      </header>
+
+      <main>
+        {/* Hero section */}
+        <div className="relative isolate overflow-hidden bg-gray-900 pb-16 pt-14 sm:pb-20">
+          <Image
+            src="/bg-people.png"
+            alt=""
+            layout="fill"
+            className="absolute inset-0 -z-10 h-full w-full object-cover"
+          />
+          <div
+            className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+            aria-hidden="true"
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+            <div
+              className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+              style={{
+                clipPath:
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+              }}
             />
-          </a>
+          </div>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+              <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+                <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
+                  Bienvenid@ a Banqi.co - El banco público de un mundo utópico
+                </div>
+              </div>
+              <div className="flex mt-5 mb-10 justify-center gap-9">
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/RgPuYOsgnRs"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+              </div>
+              <div className="text-center m-5">
+                <div className="my-10">
+                  <Link
+                    href="https://www.linkedin.com/in/sergiodelriocaicedo/"
+                    target="_blank"
+                    className="bg-blue-600 text-white rounded-lg px-3 py-2.5 my-5 text-base font-semibold leading-7 hover:bg-blue-500 hover"
+                    >
+                    Sigue la historia en linkedin
+                  </Link>
+                </div>
+                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                  Banqi.co <br />
+                  Prestamos justos entre personas confiables
+                </h1>
+                <div className="mx-auto mt-16 max-w-2xl lg:max-w-none">
+                  <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+                    {features.map((feature) => (
+                      <div key={feature.name} className="flex flex-col">
+                        <dt className="text-lg font-semibold leading-7 text-white">
+                          {feature.name}
+                        </dt>
+                        <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
+                          <p className="flex-auto">{feature.description}</p>
+                          <div className="mt-10 flex items-center justify-center gap-x-6">
+                            <Link
+                              href={feature.link}
+                              target="_blank"
+                              className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 text-2xl"
+                            >
+                              {feature.buttom}
+                            </Link>
+                          </div>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+                {/* <div className="mt-10 flex items-center justify-center gap-x-6">
+                  <Link
+                    href="/home"
+                    className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                  >
+                    Iniciar sesión
+                  </Link>
+                  <Link
+                    href="/home"
+                    className="text-sm font-semibold leading-6 text-white"
+                  >
+                    Registrarme <span aria-hidden="true">→</span>
+                  </Link>
+                </div> */}
+
+                
+                {/* <div className="mt-10 flex items-center justify-center gap-x-6">
+                  <Link
+                    href="/home"
+                    className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+                  >
+                    Iniciar sesión
+                  </Link>
+                  <Link
+                    href="/home"
+                    className="text-sm font-semibold leading-6 text-white"
+                  >
+                    Registrarme <span aria-hidden="true">→</span>
+                  </Link>
+                </div> */}
+              </div>
+            </div>
+          </div>
+          <div
+            className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+            aria-hidden="true"
+          >
+            <div
+              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+              style={{
+                clipPath:
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+              }}
+            />
+          </div>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
+
+IndexPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <>
+      <Head>
+        <>
+          <title>Banqi - Prestamos justos entre personas confiables</title>
+          <meta
+            name="description"
+            content="Banqi es una aplicación de préstamos P2P que te permite prestar y pedir dinero a individuos en lugar de bancos. Obtén mejores tasas de interés y más flexibilidad con Banqi."
+          />
+          <meta
+            name="keywords"
+            content="préstamos P2P, préstamos entre particulares, préstamos personales, préstamos rápidos, préstamos sin bancos"
+          />
+        </>
+      </Head>
+      {page}
+    </>
+  );
+};
